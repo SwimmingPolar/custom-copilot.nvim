@@ -1,0 +1,5 @@
+describe("setup", function()
+    it("required the plugin successfully", function()
+        assert.is_not_nil(require("custom-copilot"))
+    end)
+end)
