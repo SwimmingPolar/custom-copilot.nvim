@@ -1,11 +1,7 @@
-# socalled-junior-dev.nvim
+# custom-copilot.nvim
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ellisonleao/nvim-plugin-template/lint-test.yml?branch=main&style=for-the-badge)
 ![Lua](https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?style=for-the-badge&logo=lua)
-
-Many coding assistants, like Copilot, are often seen as junior developers, assigned repetitive and tedious tasks, thus the name.
-
-### Intention
 
 Just trying to use some tech stacks that is/has
 
