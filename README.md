@@ -25,6 +25,10 @@ Just trying to use some tech stacks that is/has
 
 - [ ] Use [DSPy](https://github.com/stanfordnlp/dspy?tab=readme-ov-file) to somehow improve prompting
 
+### References
+
+[Neovim Best Practices](https://github.com/nvim-neorocks/nvim-best-practices?tab=readme-ov-file)
+
 ### Pynvim
 
 how-to-use pynvim
