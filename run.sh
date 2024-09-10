@@ -22,12 +22,14 @@ if [[ -z $top_dir ]]; then
 fi
 
 # dev mode
-# run neovim in headless mode / with the current path added to runtime path / execute runtime
 run_dev() {
     while true; do
-        nvim \
-            -c ":lua vim.opt.rtp:append(\"$top_dir\")" \
-            -c "runtime $PLUGIN_NAME/**/*.{vim,lua}"
+        # Why need this? If we run/open Neovim in the script, the same
+        # configuration will be ran even after CHANGING the content of this `run.sh`,
+        # because the process that is running this infinite loop has already been
+        # saved to the memory with the content before the modification.
+        bash ./scripts/dev.sh "$top_dir" "$PLUGIN_NAME"
+
         if [ $? -eq 1 ]; then
             break
         fi
@@ -35,11 +37,9 @@ run_dev() {
 }
 # test mode
 run_test() {
-    find . -type f | entr -c nvim --headless \
-        -c ":lua vim.opt.rtp:append(\"$top_dir\")" \
-        -c "runtime $PLUGIN_NAME/**/*.{vim,lua}" \
-        -c "runtime $PLUGIN_NAME/tests/minimal_init.lua" \
-        -c "PlenaryBustedDirectory tests"
+    # Actually, don't need this as separate file unlike dev.sh.
+    # I assume `entr` will load options properly?
+    bash ./scripts/test.sh "$top_dir" "$PLUGIN_NAME"
 }
 
 # execute appropriate command per mode
