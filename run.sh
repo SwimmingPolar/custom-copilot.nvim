@@ -36,10 +36,11 @@ run_dev() {
     done
 }
 # test mode
+test_file=$3
 run_test() {
     # Actually, don't need this as separate file unlike dev.sh.
     # I assume `entr` will load options properly?
-    bash ./scripts/test.sh "$top_dir" "$PLUGIN_NAME"
+    bash ./scripts/test.sh "$top_dir" "$PLUGIN_NAME" "$test_file"
 }
 
 # execute appropriate command per mode
