@@ -14,6 +14,10 @@ _G.async = require("plenary.async")
 _G.async_test = require("plenary.async.tests")
 _G.async_util = require("plenary.async.util")
 _G.async_sleep = _G.async_util.sleep
+-- _G.future = require("plenary.async_lib.async").future
+_G.a.future = require("plenary.async_lib.async").future
+_G.a.await = require("plenary.async_lib.async").await
+_G.a.await_all = require("plenary.async_lib.async").await_all
 
 -- misc
 _G.tprint = utils.tprint
