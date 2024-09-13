@@ -1,5 +1,5 @@
-describe("setup", function()
-    it("required the plugin successfully", function()
-        assert.is_not_nil(require("custom-copilot"))
+describe("load module\t- ", function()
+    it("custom-copilots", function()
+        assert.Not.is_nil(require("custom-copilot"))
     end)
 end)
