@@ -3,7 +3,7 @@ plugin_name=$2
 test_file=$3
 
 if [[ -z $test_file ]]; then
-    test_target="PlenaryBustedDirectory tests { 'minimal_init' }"
+    test_target="PlenaryBustedDirectory tests { 'minimal_init', 'keep_going' }"
 else
     test_target="PlenaryBustedFile $test_file"
 fi
