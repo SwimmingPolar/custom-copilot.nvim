@@ -31,20 +31,24 @@ end
 M.reload = function()
     -- unload the plugin
     for k in pairs(package.loaded) do
-        if k:match("^custom-copilot") then
-            -- package.loaded[k] = nil
-            vim.print("@@@@@@@@@@@@@@@")
-            vim.print(k)
-            vim.print("@@@@@@@@@@@@@@@")
-        else
-            vim.print(k)
+        if string.match(k, "^custom%-copilot$") then
+            package.loaded[k] = nil
         end
     end
 
-    -- reload the plugin
-    -- local ok, err = pcall(function()
-    --     require("")
-    -- end)
+    vim.defer_fn(function()
+        -- reload the plugin
+        local ok, err = pcall(function()
+            require("custom-copilot")
+        end)
+
+        if ok and not err then
+            vim.notify("custom-copilot reloaded")
+        elseif err then
+            vim.notify("failed to reload plugin" .. vim.log.levels.ERROR)
+        end
+    end, 0)
+end
 end
 
 return M
