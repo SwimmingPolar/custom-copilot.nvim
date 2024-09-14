@@ -16,17 +16,7 @@ M.opts = {
     ignore_filetype = {},
 }
 
-M.init = function()
-    -- ts support requires at least nvim-0.7.0
-    if vim.fn.has("nvim-0.7.0") ~= 1 then
-        vim.api.nvim_err_writeln("Example.nvim requires at least nvim-0.7.0.")
-    end
-end
-
---- @param opts? CustomCopilotOpts | fun(): CustomCopilotOpts
-M.setup = function(opts)
-    opts = vim.tbl_deep_extend("force", M.opts, type(opts) == "function" and opts() or opts)
-end
+M.init = function() end
 
 M.reload = function()
     -- unload the plugin
@@ -49,6 +39,15 @@ M.reload = function()
         end
     end, 0)
 end
+
+--- @param opts? CustomCopilotOpts | fun(): CustomCopilotOpts
+M.setup = function(opts)
+    -- import and export LLM powered completion sort method
+    M.llm_sort = require("custom-copilot.sort")
+
+    vim.print("setup")
+
+    opts = vim.tbl_deep_extend("force", M.opts, type(opts) == "function" and opts() or opts)
 end
 
 return M
