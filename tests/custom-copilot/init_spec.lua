@@ -1,5 +1,3 @@
-describe("load module\t- ", function()
-    it("custom-copilots", function()
         assert.Not.is_nil(require("custom-copilot"))
     end)
 end)

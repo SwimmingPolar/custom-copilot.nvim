@@ -3,7 +3,7 @@ local utils = require("custom-copilot.utils")
 local assert = require("luassert")
 local spy = require("luassert.spy")
 
-describe("module loading\t", function()
+describe("load module\t", function()
     it("require custom-copilot.utils", function()
         assert.Not.is_nil(require("custom-copilot.utils"))
     end)
