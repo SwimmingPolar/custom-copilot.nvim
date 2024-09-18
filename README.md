@@ -15,16 +15,20 @@ and/or `python`. I wanted something that is:
 
 ### Roadmap
 
-1.  Get project repo map (using [aider repo map](https://github.com/paul-gauthier/aider/blob/f3cce95419e88f50351a70c14f6a9a319d92643b/aider/repomap.py#L30-L631))
-2.  Prepend as system prompt for [caching](https://platform.deepseek.com/api-docs/news/news0802/#how-to-use-deepseek-apis-caching-service) (should not change too often)
-
-<br/>
-
-- [ ] Get the current buffer context: **filename** / **content** / **cursor_position**
-
-<br/>
-
-- [ ] Use [DSPy](https://github.com/stanfordnlp/dspy?tab=readme-ov-file) to somehow improve prompting
+- [ ] Will use localLLM and proprietary models (DeepSeekV2.5-Coder / Claude 3.5 Sonnet)
+- [ ] Check tokens speed and inferrence result of local and cloud models
+- [ ] Tree-sitter for parsing and getting the content
+- [ ] Get project context: repo map + few other things (using [aider repo map](https://github.com/paul-gauthier/aider/blob/f3cce95419e88f50351a70c14f6a9a319d92643b/aider/repomap.py#L30-L631))
+- [ ] Get high ranking context: **current - filename / content / cursor_position**
+  - [ ] Is recently opened files matter?
+  - [ ] Are currently open files matter?
+  - [ ] should change on bufs change
+- [ ] [DSPy](https://github.com/stanfordnlp/dspy?tab=readme-ov-file) for prompt optimization and
+      finetuning
+- [ ] Try sorting completion items using LLM
+- [ ] Infer snippets and insert as completion items (LLM Snippet)
+- [ ] How to deal with paren, brackets, etc on FIM completion
+- [ ] Should complete at least or max? Maybe use confident score?
 
 ### References
 
