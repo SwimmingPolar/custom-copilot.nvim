@@ -7,5 +7,3 @@ if vim.g.loaded_custom_copilot == 1 then
     return
 end
 vim.g.loaded_custom_copilot = 1
-
-require("custom-copilot").setup()
