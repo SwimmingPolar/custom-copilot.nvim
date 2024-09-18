@@ -621,6 +621,6 @@ find . -type f | entr -c nvim --headless \
 **how to use scripts**
 
 ```bash
-./run.sh ./scripts/dev.sh
-./run.sh ./scripts/test.sh
+./run.sh dev
+./run.sh test
 ```
