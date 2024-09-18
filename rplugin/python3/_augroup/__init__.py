@@ -1,3 +1,3 @@
-from .augroup import PynvimAuGroup
-
-__all__ = ["PynvimAuGroup"]
+# from .augroup import PynvimAuGroup
+#
+# __all__ = ["PynvimAuGroup"]

@@ -38,7 +38,7 @@ class PynvimAuGroup(object):
             data,
         )
 
-        # Create the autocmd within the augroup
+        # Create the autocmd with the augroup
         self.nvim.api.create_autocmd(
             "BufEnter",
             {
@@ -48,11 +48,11 @@ class PynvimAuGroup(object):
             },
         )
 
-    @pynvim.function("CallLuaFunctionFromPython")
-    def hello_world(self, args):
-        self.nvim.out_write("Hello, World!\n")
-
     @pynvim.autocmd("VimEnter", pattern="*", eval='expand("<afile>")', sync=True)
     def on_vimenter(self, filename):
         # Call the setup function when Vim starts
         self.setup([])
+
+    # @pynvim.function("CallLuaFunctionFromPython")
+    # def hello_world(self, args):
+    # self.nvim.out_write("Hello, World!\n")
