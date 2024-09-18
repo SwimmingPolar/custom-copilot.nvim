@@ -11,5 +11,6 @@ fi
 # run neovim { headless mode / add runtimepath / run plugin / run test }
 find . -type f | entr -c nvim --headless \
     -c "set rtp+=$top_dir" \
+    -c "let g:is_test = 1" \
     -c "runtime $plugin_name/**/*.{vim,lua}" \
     -c "runtime $plugin_name/tests/minimal_init.lua" -c "$test_target"

@@ -1,7 +1,12 @@
 TESTS_INIT=tests/minimal_init.lua
 TESTS_DIR=tests/
 
-.PHONY: test
+.PHONY: test, install
+
+install:
+	python3 venv venv \
+	./venv/bin/activate \
+	pip install -r requirements.txt
 
 test:
 	@nvim \
