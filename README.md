@@ -275,7 +275,7 @@ We can easily infer when we should exactly run `UpdateRemotePlugins` by investig
 
 <small>**manifest** is a list entries or items of certain things. In this case, features we implemented are listed</small>
 
-**So, what changes to manifest?**
+**So, what changes a manifest?**
 
 - Arguments when calling decorators
 - Parameters in methods
