@@ -8,14 +8,14 @@ if vim.g.loaded_custom_copilot == 1 then
 end
 vim.g.loaded_custom_copilot = 1
 
-local plugin_ok, plugin_load_err = pcall(function()
+local ok, err = pcall(function()
     require("custom-copilot").setup()
 end)
 
 -- Check if running on dev mode
 if vim.g.is_dev == 1 then
     -- error while loading lua plugin
-    if not plugin_ok then
-        vim.print(plugin_load_err)
+    if not ok then
+        vim.print(err)
     end
 end
