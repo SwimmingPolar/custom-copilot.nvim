@@ -16,8 +16,8 @@ M.opts = {
     ignore_filetype = {},
 }
 
+-- On dev, reload plugin and update remote plugin manifest on file change
 M.reload = function()
-    vim.notify("reloading plugin")
     local package_found = false
     -- unload the plugin
     for k in pairs(package.loaded) do
@@ -32,40 +32,47 @@ M.reload = function()
         return
     end
 
-    -- update remote plugin manifest
-    vim.cmd("UpdateRemotePlugins")
-
     -- load the plugin
     vim.defer_fn(function()
-        -- only if it's found and unloaded
-        -- reload the plugin
+        -- update remote plugin manifest
         local ok, err = pcall(function()
-            require("custom-copilot")
+            vim.cmd("UpdateRemotePlugins")
         end)
+        if not ok then
+            vim.notify(tostring(err) or "error updating remote plugin", vim.log.levels.ERROR, {})
+        end
 
-        if ok and not err then
-            vim.notify("custom-copilot reloaded")
-        elseif err then
-            vim.notify("failed to reload plugin" .. vim.log.levels.ERROR)
+        -- reload the plugin
+        ok, err = pcall(function()
+            require("custom-copilot").setup()
+        end)
+        if not ok then
+            vim.notify(tostring(err) or "error calling require and setup on the plugin", vim.log.levels.ERROR, {})
         end
     end, 0)
 end
 
 M.init = function()
     -- if dev mode, add refreshing logic
-    local group = vim.api.nvim_create_augroup("custom-copilot-augroup", { clear = true })
-    vim.api.nvim_create_autocmd("BufWritePost", {
-        group = group,
-        pattern = { "*.py", "*.lua" },
-        callback = function()
-            vim.print("autocmd!")
-        end,
-    })
+    if vim.g.is_dev == 1 then
+        local group = vim.api.nvim_create_augroup("custom-copilot-augroup", { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            group = group,
+            pattern = { "*.py", "*.lua" },
+            callback = M.reload,
+        })
+    end
 end
 
 --- @param opts? CustomCopilotOpts | fun(): CustomCopilotOpts
 M.setup = function(opts)
+    -- call init func for extra works if needed
     M.init()
+    vim.print("hello")
+
+    -- logics
+
+    -- merge default opts and user opts
     opts = vim.tbl_deep_extend("force", M.opts, type(opts) == "function" and opts() or (opts or {}))
 end
 
