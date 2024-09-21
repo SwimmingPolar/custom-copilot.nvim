@@ -11,4 +11,4 @@ nvim \
     -c "set rtp+=$top_dir" \
     -c "let g:is_dev = 1" \
     -c "let g:python3_host_prog = 'venv/bin/python3'" \
-    -c "\"runtime $PLUGIN_NAME/**/*.{vim,lua}\"" # add the current dir to runtimepath \
+    -c "runtime! plugin/**/*.{vim,lua}"
