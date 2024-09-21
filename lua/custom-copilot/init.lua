@@ -16,17 +16,28 @@ M.opts = {
     ignore_filetype = {},
 }
 
-M.init = function() end
-
 M.reload = function()
+    vim.notify("reloading plugin")
+    local package_found = false
     -- unload the plugin
     for k in pairs(package.loaded) do
         if string.match(k, "^custom%-copilot$") then
             package.loaded[k] = nil
+            package_found = true
         end
     end
 
+    -- if no package was found, do nothing
+    if not package_found then
+        return
+    end
+
+    -- update remote plugin manifest
+    vim.cmd("UpdateRemotePlugins")
+
+    -- load the plugin
     vim.defer_fn(function()
+        -- only if it's found and unloaded
         -- reload the plugin
         local ok, err = pcall(function()
             require("custom-copilot")
@@ -40,14 +51,22 @@ M.reload = function()
     end, 0)
 end
 
+M.init = function()
+    -- if dev mode, add refreshing logic
+    local group = vim.api.nvim_create_augroup("custom-copilot-augroup", { clear = true })
+    vim.api.nvim_create_autocmd("BufWritePost", {
+        group = group,
+        pattern = { "*.py", "*.lua" },
+        callback = function()
+            vim.print("autocmd!")
+        end,
+    })
+end
+
 --- @param opts? CustomCopilotOpts | fun(): CustomCopilotOpts
 M.setup = function(opts)
-    -- import and export LLM powered completion sort method
-    M.llm_sort = require("custom-copilot.sort")
-
-    vim.print("setup")
-
-    opts = vim.tbl_deep_extend("force", M.opts, type(opts) == "function" and opts() or opts)
+    M.init()
+    opts = vim.tbl_deep_extend("force", M.opts, type(opts) == "function" and opts() or (opts or {}))
 end
 
 return M
